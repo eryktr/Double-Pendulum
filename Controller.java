@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+
 
 public class Controller
 {
@@ -18,8 +20,6 @@ public class Controller
     @FXML
     private CheckBox drawPathCheckBox;
 
-    private Circle FirstPendulum;
-
     //Z wiadomych powodów nie mogłem użyć "continue" jako nazwy zmiennej.
     private boolean keepDrawing, drawPath;
 
@@ -31,9 +31,10 @@ public class Controller
            while(keepDrawing)
            {
                drawPath = drawPathCheckBox.isSelected();
-               //Poki co wszystko co dodalem do Controllera to testy czy animacja dziala
+               //wygodniej mi bylo te funkcje zawrzec w utility, zawsze w razie czego mozna je skopiowac do contollera
                Utility.calculateNewValues();
-               Utility.TranslateCircle(FirstPendulum,Utility.positionX1,Utility.positionY1);
+               Utility.TranslateFirstPendulum();
+               Utility.TranslateSecondPendulum();
                try {wait(16);} catch (InterruptedException ex) {}
                //TODO
            }
@@ -43,9 +44,7 @@ public class Controller
     public void initialize()
     {
         Utility.setInitialValues();
-        final double RADIUS = 25;
-        FirstPendulum = new Circle (Utility.positionX1, Utility.positionY1, RADIUS);
-        drawingPane.getChildren().add(FirstPendulum);
+        Utility.initializeFigures(drawingPane);
         //TODO
     }
 
@@ -67,7 +66,6 @@ public class Controller
         stopBtn.setDisable(newState);
         startBtn.setDisable(!newState);
         keepDrawing = false;
-        initialize();
         //TODO
     }
 
