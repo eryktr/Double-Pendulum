@@ -1,7 +1,9 @@
 package com.pendulum;
 
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
@@ -26,6 +28,7 @@ public class Utility
 
     public static void calculateNewValues()
     {
+        //To wszystko trzeba bedzie zmienic na symulacje ruchu wahadla
         velocityX1 += 0;
         velocityY1 += g*dt;
         positionY1 += velocityY1*dt;
@@ -116,6 +119,34 @@ public class Utility
         drawingPane.getChildren().add(firstLine);
         secondLine = new Line (positionX1, positionY1, positionX2, positionY2);
         drawingPane.getChildren().add(secondLine);
+        pathPoints = new ArrayList<>();
+    }
+
+    //Rysuje droge wahadla w podanym kolorze, pendulumNumber = numer wahadla (1, 2)
+    public static void drawPendulumPath (Pane drawingPane, Color color, int pendulumNumber)
+    {
+        double x = 0, y = 0;
+        switch (pendulumNumber)
+        {
+            case 1:
+                x = positionX1;
+                y = positionY1;
+                break;
+            case 2:
+                x = positionX2;
+                y = positionY2;
+                break;
+        }
+        Point point = new Point (x, y, color);
+        pathPoints.add(point);
+        Circle c = point.drawPoint();
+        //Chyba jedyny sposob zeby updatowac Pane z tego watku
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                drawingPane.getChildren().add(c);
+            }
+        });
     }
 
 }

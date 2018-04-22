@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
@@ -20,6 +21,12 @@ public class Controller
     @FXML
     private CheckBox drawPathCheckBox;
 
+    //Poki co zrobilem to tak, ale zdecydowanie trzeba to zastapic czyms lepszym
+    private Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.BROWN, Color.CORAL,
+        Color.AQUAMARINE, Color.INDIGO, Color.LIMEGREEN};
+    private int colorIndex = 0;
+    //TODO
+
     //Z wiadomych powodów nie mogłem użyć "continue" jako nazwy zmiennej.
     private boolean keepDrawing, drawPath;
 
@@ -35,6 +42,12 @@ public class Controller
                Utility.calculateNewValues();
                Utility.TranslateFirstPendulum();
                Utility.TranslateSecondPendulum();
+               if (drawPath)
+               {
+                   //Trzeba bedzie pewnie dodac cos zeby bylo wiecej kolorow niz tylko czerwony i niebieski
+                   Utility.drawPendulumPath(drawingPane, colors[colorIndex], 1);
+                   Utility.drawPendulumPath(drawingPane, colors[colorIndex+1], 2);
+               }
                try {wait(16);} catch (InterruptedException ex) {}
                //TODO
            }
@@ -45,7 +58,6 @@ public class Controller
     {
         Utility.setInitialValues();
         Utility.initializeFigures(drawingPane);
-        //TODO
     }
 
     //Zaimplementowałem zmianę stanu Buttonów przy kliknięciu, powinno działać prawidłowo.
@@ -57,7 +69,6 @@ public class Controller
         Timer timer = new Timer();
         timer.start();
         keepDrawing = true;
-        //TODO
     }
 
     public void stopAnimation()
@@ -66,6 +77,15 @@ public class Controller
         stopBtn.setDisable(newState);
         startBtn.setDisable(!newState);
         keepDrawing = false;
+        //To tez bedzie do zmiany jak ustalimy lepszy sposob zmiany kolory
+        if (colorIndex<8)
+        {
+            colorIndex+=2;
+        }
+        else
+        {
+            colorIndex=0;
+        }
         //TODO
     }
 
