@@ -44,7 +44,6 @@ public class Controller
                Utility.TranslateSecondPendulum();
                if (drawPath)
                {
-                   //Trzeba bedzie pewnie dodac cos zeby bylo wiecej kolorow niz tylko czerwony i niebieski
                    Utility.drawPendulumPath(drawingPane, colors[colorIndex], 1);
                    Utility.drawPendulumPath(drawingPane, colors[colorIndex+1], 2);
                }
@@ -77,7 +76,7 @@ public class Controller
         stopBtn.setDisable(newState);
         startBtn.setDisable(!newState);
         keepDrawing = false;
-        //To tez bedzie do zmiany jak ustalimy lepszy sposob zmiany kolory
+        //To tez bedzie do zmiany jak ustalimy lepszy sposob zmiany koloru
         if (colorIndex<8)
         {
             colorIndex+=2;
