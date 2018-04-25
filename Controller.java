@@ -39,6 +39,7 @@ public class Controller
     {
        public synchronized void run()
        {
+           Utility.sim.computePositions();
            while(keepDrawing)
            {
                drawPath = drawPathCheckBox.isSelected();
@@ -61,6 +62,8 @@ public class Controller
     {
         Utility.setInitialValues();
         Utility.initializeFigures(drawingPane);
+        Utility.sim = new Simulation();
+        Simulation.state.set(Simulation.startState);
     }
 
     //Zaimplementowałem zmianę stanu Buttonów przy kliknięciu, powinno działać prawidłowo.

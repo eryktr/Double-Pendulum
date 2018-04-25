@@ -23,11 +23,14 @@ public class Utility
     private static Circle firstPendulum, secondPendulum;
     private static Line firstLine, secondLine;
 
+    public static Simulation sim;
+
     //Pierwsze wahadlo przyczepione w X = 300 Y = 0
     //Pane: szerokosc 600 wysokosc 500
 
     public static void calculateNewValues()
     {
+        /*
         //To wszystko trzeba bedzie zmienic na symulacje ruchu wahadla
         velocityX1 += 0;
         velocityY1 += g*dt;
@@ -39,6 +42,17 @@ public class Utility
         positionY2 += velocityY2*dt;
         positionX2 += velocityX2*dt;
         //TODO
+        */
+        sim.simulate();
+        sim.computePositions();
+
+        positionX1 = Simulation.positions.x;
+        positionY1 = Simulation.positions.y;
+        positionX2 = Simulation.positions.z;
+        positionY2 = Simulation.positions.w;
+
+
+
     }
 
     //Translatuje pierwsze wahadlo wraz z nitka przyczepiona do niego
