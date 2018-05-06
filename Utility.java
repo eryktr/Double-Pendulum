@@ -25,7 +25,7 @@ public class Utility
 
     public static Simulation sim;
 
-    //Pierwsze wahadlo przyczepione w X = 300 Y = 0
+    //Pierwsze wahadlo przyczepione w X = 300 Y = 150
     //Pane: szerokosc 600 wysokosc 500
 
     public static void calculateNewValues()
@@ -59,7 +59,7 @@ public class Utility
     public static void TranslateFirstPendulum ()
     {
         TranslateCircle(firstPendulum, positionX1, positionY1);
-        TranslateLine(firstLine, 300, 0, positionX1, positionY1);
+        TranslateLine(firstLine, 300, 150, positionX1, positionY1);
     }
 
     //Przenosi drugie wahadlo wraz z nitka
@@ -115,7 +115,7 @@ public class Utility
     {
         //Polozenie punktu zaczepienia wahadla pierwszego
         double axisX = 300;
-        double axisY = 0;
+        double axisY = 150;
 
         double dy = y - axisY;
         double dx = x - axisX;
@@ -129,7 +129,7 @@ public class Utility
         drawingPane.getChildren().add(firstPendulum);
         secondPendulum = new Circle (positionX2, positionY2, RADIUS);
         drawingPane.getChildren().add(secondPendulum);
-        firstLine = new Line (300, 0, positionX1, positionY1);
+        firstLine = new Line (300, 150, positionX1, positionY1);
         drawingPane.getChildren().add(firstLine);
         secondLine = new Line (positionX1, positionY1, positionX2, positionY2);
         drawingPane.getChildren().add(secondLine);

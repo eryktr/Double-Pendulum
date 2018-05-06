@@ -5,7 +5,7 @@ public class Simulation{
     public static boolean pause = true, exit = false;
 
     //Stan początkowy
-    public static double h = 0.002, g = 9.81, m1 = 5.4, m2 = 1.5, l1 = 0.2, l2 = 0.2, x0 = 300, y0 = 0, scale = 500;
+    public static double h = 0.002, g = 9.81, m1 = 5.4, m2 = 1.5, l1 = 0.2, l2 = 0.2, x0 = 300, y0 = 150, scale = 500;
 
     public Simulation() {
         startState = new Vec4();
@@ -49,8 +49,8 @@ public class Simulation{
         A tu są cztery równiania definiujące nasz ruch
          */
 
-        //Wlasnie dodałem tą instrukcje jako lekkie tłumienie i zdaje się działać
-        in.mul(0.999);
+        //dodałem tą instrukcje jako lekkie tłumienie i zdaje się działać
+        in.mul(0.998);
 
         out.x = in.z;
         out.y = in.w;
