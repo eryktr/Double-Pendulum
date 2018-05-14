@@ -5,15 +5,20 @@ public class Simulation{
     public static boolean pause = true, exit = false;
 
     //Stan początkowy
-    public static double h = 0.002, g = 9.81, m1 = 5.4, m2 = 1.5, l1 = 0.2, l2 = 0.2, x0 = 300, y0 = 150, scale = 500;
+    public static double h = 0.002, g = 9.81, x0 = 300, y0 = 150, scale = 500;
+    public static double m1, m2, l1, l2;
 
-    public Simulation() {
+    public Simulation(Double[] parameters) {
+        m1 = parameters[0];
+        m2 = parameters[1];
+        l1 = parameters[2];
+        l2 = parameters[3];
         startState = new Vec4();
         state = new Vec4();
         positions = new Vec4();
 
-        startState.x = Math.PI/1.4;
-        startState.y = Math.PI/7;
+        startState.x = parameters[4];
+        startState.y = parameters[5];
     }
     /*
     Simulation pierwotnie była runnable
@@ -113,5 +118,19 @@ public class Simulation{
         public void mul(double a) {
             x *= a; y *= a; z *= a; w *= a;
         }
+    }
+
+    public void resetSimulationValues(Double[] parameters)
+    {
+        m1 = parameters[0];
+        m2 = parameters[1];
+        l1 = parameters[2];
+        l2 = parameters[3];
+        startState = new Vec4();
+        state = new Vec4();
+        positions = new Vec4();
+
+        startState.x = parameters[4];
+        startState.y = parameters[5];
     }
 }

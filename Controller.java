@@ -45,12 +45,11 @@ public class Controller
                drawPath = drawPathCheckBox.isSelected();
                //wygodniej mi bylo te funkcje zawrzec w utility, zawsze w razie czego mozna je skopiowac do contollera
                Utility.calculateNewValues();
-               Utility.TranslateFirstPendulum();
-               Utility.TranslateSecondPendulum();
+               Utility.translateFirstPendulum();
+               Utility.translateSecondPendulum();
                if (drawPath)
                {
-                   Utility.drawPendulumPath(drawingPane, colors[colorIndex], 1);
-                   Utility.drawPendulumPath(drawingPane, colors[colorIndex+1], 2);
+                   Utility.drawPendulumPath(drawingPane, colors[colorIndex], 2);
                }
                try {wait(16);} catch (InterruptedException ex) {}
                //TODO
@@ -60,9 +59,12 @@ public class Controller
 
     public void initialize()
     {
-        Utility.setInitialValues();
+        TextField[] textFields = {firstMass, secondMass, firstAngle, secondAngle, firstLength, secondLength};
+        Utility.setDefaultValues(textFields);
+        Utility.setInitialValues(textFields);
         Utility.initializeFigures(drawingPane);
-        Utility.sim = new Simulation();
+        Double[] parameters = getTextFieldValues();
+        Utility.sim = new Simulation(parameters);
         Simulation.state.set(Simulation.startState);
     }
 
@@ -72,6 +74,7 @@ public class Controller
         boolean newState = !startBtn.isDisabled();
         startBtn.setDisable(newState);
         stopBtn.setDisable(!newState);
+        resetPendulumsPositions();
         Timer timer = new Timer();
         timer.start();
         keepDrawing = true;
@@ -83,21 +86,39 @@ public class Controller
         stopBtn.setDisable(newState);
         startBtn.setDisable(!newState);
         keepDrawing = false;
-        //To tez bedzie do zmiany jak ustalimy lepszy sposob zmiany koloru
-        if (colorIndex<8)
-        {
-            colorIndex+=2;
-        }
-        else
-        {
-            colorIndex=0;
-        }
-        //TODO
+        colorIndex = (colorIndex+1) % 10;
+        resetPendulumsPositions();
     }
 
     public void clearPaths()
     {
+        drawingPane.getChildren().clear();
+        Utility.initializeFigures(drawingPane);
         //TODO
+    }
+
+    private Double[] getTextFieldValues()
+    {
+        Double[] parameters = new Double[6];
+        parameters[0] = Double.parseDouble(firstMass.getText());
+        parameters[1] = Double.parseDouble(secondMass.getText());
+        parameters[2] = Double.parseDouble(firstLength.getText());
+        parameters[3] = Double.parseDouble(secondLength.getText());
+        parameters[4] = Double.parseDouble(firstAngle.getText());
+        parameters[5] = Double.parseDouble(secondAngle.getText());
+        return parameters;
+    }
+
+    private void resetPendulumsPositions()
+    {
+        TextField[] textFields = {firstMass, secondMass, firstAngle, secondAngle, firstLength, secondLength};
+        Utility.setInitialValues(textFields);
+        Utility.addNewValuesToSimulation();
+        Utility.translateFirstPendulum();
+        Utility.translateSecondPendulum();
+        Double[] parameters = getTextFieldValues();
+        Utility.sim.resetSimulationValues(parameters);
+        Simulation.state.set(Simulation.startState);
     }
 
 }
