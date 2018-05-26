@@ -1,0 +1,75 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<BorderPane fx:controller="com.pendulum.Controller"
+            xmlns:fx="http://javafx.com/fxml" >
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="Info">
+                    <items>
+                        <MenuItem text="Show info"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <left>
+        <VBox spacing="20">
+            <children>
+                <Label text="Parameters" style="-fx-font-size: 30; -fx-font-family: Century" />
+                <GridPane style="-fx-font-family: 'Times New Roman'; -fx-font-size: 16" vgap="5" hgap="10">
+                    <children>
+                        <Label text="First mass = " GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                        <Label text="Second mass =" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                        <Label text="First angle =" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                        <Label text="Second angle =" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                        <Label text="First length =" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                        <Label text="Second length =" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+
+                        <TextField  fx:id="firstMass" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="50"/>
+                        <TextField fx:id="secondMass" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="50"/>
+                        <TextField fx:id="firstAngle" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="50"/>
+                        <TextField fx:id="secondAngle" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="50" />
+                        <TextField fx:id="firstLength" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="50" />
+                        <TextField fx:id="secondLength" GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="50"/>
+
+                        <Label text="Draw path:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <CheckBox fx:id="drawPathCheckBox" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+
+                        <Button fx:id="startBtn" text="Start Animation" GridPane.rowIndex="7" GridPane.columnIndex="0" onAction="#startAnimation" />
+                        <Button fx:id="stopBtn" text="Stop Animation" GridPane.rowIndex="7" GridPane.columnIndex="1" disable="true" onAction="#stopAnimation" />
+                        <Button fx:id="clearPaths" text="Clear Paths" GridPane.rowIndex="8" GridPane.columnIndex="0" minWidth="${stopBtn.width}" onAction="#clearPaths" />
+                    </children>
+                </GridPane>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <Pane fx:id="drawingPane" minWidth="600" minHeight="500" style="-fx-border-color: black" >
+            <clip>
+                <Rectangle width = "${drawingPane.width}" height="${drawingPane.height}" >
+
+                </Rectangle>
+            </clip>
+            <BorderPane.margin>
+                <Insets top="10" bottom="10" left="10" right="10" />
+            </BorderPane.margin>
+        </Pane>
+    </center>
+
+</BorderPane>
