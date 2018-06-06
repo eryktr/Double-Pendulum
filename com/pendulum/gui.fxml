@@ -20,7 +20,7 @@
             <menus>
                 <Menu text="Info">
                     <items>
-                        <MenuItem text="Show info"/>
+                        <MenuItem onAction="#info" text="Show info"/>
                     </items>
                 </Menu>
             </menus>
