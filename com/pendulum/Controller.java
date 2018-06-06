@@ -2,6 +2,7 @@ package com.pendulum;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -9,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+
 
 
 public class Controller
@@ -98,6 +100,21 @@ public class Controller
         drawingPane.getChildren().clear();
         Utility.initializeFigures(drawingPane);
         //TODO
+    }
+    
+    public void info()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setPrefSize(690, 300);
+        alert.setTitle("Info");
+        alert.setHeaderText("Double Pendulum Simulation");
+        alert.setContentText("Authors:\n\nEryk Trzeciakiewicz\nDaniel Kluska"
+                + "\nWojciech Kwaśniewicz\nTomasz Karciarz" +
+                "\n\nThe program is the result of an educational project"
+                + " made for the purposes of Physics course for Computer Science students"
+                + "\n(Faculty of Fundamental Problems of Technology, Wrocław University of Science and Technology) ");
+
+        alert.showAndWait();
     }
 
     private Double[] getTextFieldValues()
