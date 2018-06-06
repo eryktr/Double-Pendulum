@@ -1,6 +1,7 @@
 package com.pendulum;
 
 public class Simulation{
+    private final static double  CONST_PI = 3.141592653589793;
     public static Vec4 startState, state, positions;
     public static boolean pause = true, exit = false;
 
@@ -20,23 +21,7 @@ public class Simulation{
         startState.x = parameters[4];
         startState.y = parameters[5];
     }
-    /*
-    Simulation pierwotnie była runnable
-    @Override
-    public void run() {
-        state.set(startState);
-        computePositions();
-        repaint();
 
-        while(!exit) {
-            while(pause) { try { Thread.sleep(1); } catch (InterruptedException e) { } }
-            simulate();
-            computePositions();
-            repaint();
-            try { Thread.sleep((int)(h*1000)); } catch (InterruptedException e) { }
-        }
-    }
-    */
 
     public void f(Vec4 out, Vec4 in) {
         /*
@@ -95,6 +80,11 @@ public class Simulation{
         t = state;
         state = s;
         s = t;
+
+        while(state.x > 2 * CONST_PI) state.x -= 2*CONST_PI;
+        while(state.y > 2 * CONST_PI) state.y -= 2*CONST_PI;
+        while(state.x < 0 * CONST_PI) state.x += 2*CONST_PI;
+        while(state.y < 0 * CONST_PI) state.y += 2*CONST_PI;
     }
 
     //Bierze wyliczone kąty i oblicza pozycje kółek

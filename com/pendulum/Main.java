@@ -15,5 +15,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setTitle("Double Pendulum Project");
         primaryStage.show();
+        primaryStage.setResizable(false);
+        primaryStage.setMaximized(false);
     }
 }

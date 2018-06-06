@@ -13,6 +13,7 @@ import javafx.scene.shape.Line;
 
 public class Controller
 {
+    private final static double  CONST_PI = 3.141592653589793;
     //Referencja do Pane'a, po którym będziemy rysować (Tego z czarnym borderem)
     @FXML
     private Pane drawingPane;
@@ -108,6 +109,10 @@ public class Controller
         parameters[3] = Double.parseDouble(secondLength.getText());
         parameters[4] = Double.parseDouble(firstAngle.getText());
         parameters[5] = Double.parseDouble(secondAngle.getText());
+        while(parameters[4] > 2 * CONST_PI) parameters[4] -= 2*CONST_PI;
+        while(parameters[5] > 2 * CONST_PI) parameters[5] -= 2*CONST_PI;
+        while(parameters[4] < 0 * CONST_PI) parameters[4] += 2*CONST_PI;
+        while(parameters[5] < 0 * CONST_PI) parameters[5] += 2*CONST_PI;
         return parameters;
     }
 
